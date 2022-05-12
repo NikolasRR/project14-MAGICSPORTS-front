@@ -8,6 +8,7 @@ import SignInScreen from "./SignInScreen";
 
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
+import SignUpScreen from "./SignUpScreen";
 
 function App() {
     const [token, setToken] = useState(null);
@@ -41,6 +42,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/sign-in" element={<SignInScreen />} />
+                    <Route path="/sign-up" element={<SignUpScreen />} />
                 </Routes>
             </BrowserRouter>
         </TokenContext.Provider>
