@@ -38,7 +38,7 @@ function SignUpScreen() {
       <Form onSubmit={SignIn}>
       <Input
           placeholder="Nome"
-          value={email}
+          value={name}
           type="name"
           onChange={(ev) => setName(ev.target.value)}
         ></Input>
