@@ -8,7 +8,6 @@ import SignInScreen from "./SignInScreen";
 
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
-
 function App() {
     const [token, setToken] = useState(null);
 
