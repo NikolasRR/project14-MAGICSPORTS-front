@@ -5,10 +5,10 @@ import TokenContext from "../contexts/TokenContext";
 
 import Home from "./Home";
 import SignInScreen from "./SignInScreen";
+import SignUpScreen from "./SignUpScreen";
 
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
-import SignUpScreen from "./SignUpScreen";
 
 function App() {
     const [token, setToken] = useState(null);
