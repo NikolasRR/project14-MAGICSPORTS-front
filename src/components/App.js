@@ -11,7 +11,6 @@ import SignUpScreen from "./SignUpScreen";
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
 
-
 function App() {
     const [token, setToken] = useState(null);
 
