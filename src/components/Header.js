@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg";
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
 import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circle-outline.svg";
-import {ReactComponent as PointIcon} from "../assets/img/ion-icons/caret-up-outline.svg"
+import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-outline.svg";
 import { useState } from "react";
 function Header() {
   const navigate = useNavigate();
   const [showShoppingCart, setShowShoppingCart] = useState(false);
 
   function ShowShoppingCart() {
-    setShowShoppingCart(true);
+    setShowShoppingCart(showShoppingCart ? false : true);
   }
 
   return (
@@ -34,9 +34,14 @@ function Header() {
           <UserIcon />
           <NameUser>Olá, Anonimo...</NameUser>
           <DivShopping onClick={ShowShoppingCart}>
-            <PointIcon/>
             <ShoppingCartIcon />
-            <ShoppingCart/>
+            <ShowShoppingCartDiv opacity={showShoppingCart ? "1" : 0}>
+              <PointIcon />
+              <ShoppingCart
+                width={showShoppingCart ? "300px" : 0}
+                height={showShoppingCart ? "400px" : 0}
+              />
+            </ShowShoppingCartDiv>
           </DivShopping>
         </ButtonsProfile>
       </Content>
@@ -46,30 +51,32 @@ function Header() {
 
 export default Header;
 
-
 // Área do carrinho
+const ShowShoppingCartDiv = styled.div`
+  opacity: ${(props) => props.opacity};
+  position: absolute;
+  top: 50px;
+  right: 0px;
+`;
 const DivShopping = styled.div`
-  position:relative;
+  position: relative;
   .box-point {
     position: absolute;
-    top:25px;
-    right:-3px;
-    color:#ffff;
+    top: -25px;
+    right: -6px;
+    color: #ffff;
   }
-`
+`;
 
 const ShoppingCart = styled.div`
   transition: width 600ms ease-out, height 600ms ease-out;
-  position:absolute;
-  top:45px;
-  right:0px;
-  width:300px;
-  height:400px;
+  width: ${(props) => props.width};
+  max-height: ${(props) => props.height};
   border-radius: 5px;
-  background-color:#ffff;
+  background-color: #ffff;
   box-shadow: 2px 2px 5px black;
-  z-index:1;
-`
+  z-index: 1;
+`;
 
 // Nome do usuario logado
 const NameUser = styled.h3``;
