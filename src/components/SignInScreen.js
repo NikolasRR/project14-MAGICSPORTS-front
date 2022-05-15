@@ -16,7 +16,7 @@ function SignInScreen() {
         ev.preventDefault();
         //FIXME trocar o link do post antes do commit
         try {
-            await axios.post("http://localhost:5000/sign-in", 
+            await axios.post("https://magic-sports.herokuapp.com/sign-in", 
         {
             email: email,
             password: password
