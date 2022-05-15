@@ -5,18 +5,17 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 import ProductBox from "./products/ProductBox.js";
 import PageNumber from "./PageNumber.js";
-
-// import Header from "./Header";
+import Header from "./Header";
 
 function Home() {
     const [last, setLast] = useState(0);
     const [products, setProducts] = useState([]);
     const [pages, setPages] = useState([]);
-    const current = Math.ceil((last + 10) / 10);
+    const current = Math.ceil((last + 20) / 20);
 
     useEffect(async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/products?limit=10&last=${last}`);
+            const res = await axios.get(`http://localhost:5000/products?limit=20&last=${last}`);
             setProducts(res.data.page);
             setPages(res.data.pages);
         } catch (error) {
@@ -24,12 +23,12 @@ function Home() {
         }
     }, [last]);
 
-    const previousPageIcon = last !== 0 && (<PreviousPage onClick={() => setLast(last - 10)}/>);
-    const nextPageIcon = (last + 10) / 10 !== pages.length && (<NextPage onClick={() => setLast(last + 10)}/>);
+    const previousPageIcon = last !== 0 && (<PreviousPage onClick={() => setLast(last - 20)}/>);
+    const nextPageIcon = (last + 20) / 20 !== pages.length && (<NextPage onClick={() => setLast(last + 20)}/>);
     
     return (
         <>
-            {/* <Header /> */}
+            <Header />
             <Container>
                 {products?.map(product => <ProductBox key={product.id} product={product} />)}
             </Container>
@@ -49,11 +48,19 @@ const Container = styled.main`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 70px;
+    margin: 50px auto 0 auto;
+    width: 375px;
+    @media (min-width: 650px) {
+        width: 650px;
+    }
+    @media (min-width: 1000px) {
+        width: 1000px;
+    }
 `;
 
 const PageNavigation = styled.div`
-    margin: 30px auto 30px auto;
+    margin: 30px auto 0 auto;
+    padding-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;

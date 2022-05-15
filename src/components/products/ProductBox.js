@@ -27,8 +27,22 @@ const Box = styled.article`
     height: 220px;
     border: 1px solid gray;
     border-radius: 10px;
-    margin-bottom: 10px;
-    &:nth-child(odd) { margin-right: 10px; }
+    margin: 0 15px 10px 0;
+    &:nth-child(even) { margin-right: 0; }
+    &:hover { 
+        cursor: pointer;
+        border: 1px solid #fdb927;
+    }
+    @media (min-width: 650px) {
+        &:nth-child(even) { margin: 0 15px 10px 0; }
+        &:nth-child(3n) { margin-right: 0; }
+        
+    }
+    @media (min-width: 1000px) {
+        &:nth-child(even) { margin: 0 15px 10px 0; }
+        &:nth-child(3n) { margin: 0 15px 10px 0; }
+        &:nth-child(5n) { margin-right: 0; }
+    }
 `;
 
 const Img = styled.img`
