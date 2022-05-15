@@ -5,6 +5,8 @@ import TokenContext from "../contexts/TokenContext";
 
 import Home from "./Home";
 import SignInScreen from "./SignInScreen";
+import ProductPage from "./products/ProductPage";
+import SignUpScreen from "./SignUpScreen";
 
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
@@ -41,6 +43,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/sign-in" element={<SignInScreen />} />
+                    <Route path="/sign-up" element={<SignUpScreen />} />
+                    <Route path="/product/:productID" element={<ProductPage />} />
+                    
                 </Routes>
             </BrowserRouter>
         </TokenContext.Provider>
