@@ -11,7 +11,7 @@ function ProductPage() {
 
     useEffect(async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/products/${productID}`);
+            const res = await axios.get(`https://magic-sports.herokuapp.com/products/${productID}`);
             setInfos(res.data);
         } catch (error) {
             alert("deu ruim papa");

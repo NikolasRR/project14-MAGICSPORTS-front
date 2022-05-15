@@ -15,7 +15,7 @@ function Home() {
 
     useEffect(async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/products?limit=20&last=${last}`);
+            const res = await axios.get(`https://magic-sports.herokuapp.com/products?limit=20&last=${last}`);
             setProducts(res.data.page);
             setPages(res.data.pages);
         } catch (error) {
