@@ -10,6 +10,7 @@ import SignUpScreen from "./SignUpScreen";
 
 import "./../assets/css/reset.css";
 import "./../assets/css/style.css";
+import Checkout from "./Checkout";
 
 function App() {
     const [token, setToken] = useState(null);
@@ -45,7 +46,7 @@ function App() {
                     <Route path="/sign-in" element={<SignInScreen />} />
                     <Route path="/sign-up" element={<SignUpScreen />} />
                     <Route path="/product/:productID" element={<ProductPage />} />
-                    
+                    <Route path="/checkout" element={<Checkout />} />
                 </Routes>
             </BrowserRouter>
         </TokenContext.Provider>
