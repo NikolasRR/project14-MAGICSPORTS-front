@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg";
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
 import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circle-outline.svg";
@@ -7,10 +8,22 @@ import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-ou
 import { useState } from "react";
 function Header() {
   const navigate = useNavigate();
+  const [shoppingCart, setShoppingCart] = useState([]);
   const [showShoppingCart, setShowShoppingCart] = useState(false);
 
+  async function getShoppingCart() {
+    try {
+      await axios.get("http://localhost:5000/shopping-cart").then((res) => {
+        const sCarts = res.data;
+        setShoppingCart(sCarts);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
   function ShowShoppingCart() {
     setShowShoppingCart(showShoppingCart ? false : true);
+    getShoppingCart();
   }
 
   return (
@@ -35,12 +48,31 @@ function Header() {
           <NameUser>Olá, Anonimo...</NameUser>
           <DivShopping onClick={ShowShoppingCart}>
             <ShoppingCartIcon />
-            <ShowShoppingCartDiv opacity={showShoppingCart ? "1" : 0}>
-              <PointIcon />
-              <ShoppingCart
-                width={showShoppingCart ? "300px" : 0}
-                height={showShoppingCart ? "400px" : 0}
-              />
+            <PointIcon display={showShoppingCart ? "initial" : "none"} />
+            <ShowShoppingCartDiv
+              opacity={showShoppingCart ? "1" : 0}
+              width={showShoppingCart ? "300px" : 0}
+              height={showShoppingCart ? "400px" : 0}
+            >
+              <ShoppingCartMain>
+                {shoppingCart === [] ? (
+                  <article>
+                    <h3>Ainda não há nada aqui...</h3>
+                  </article>
+                ) : (
+                  shoppingCart.map((cart) => {
+                    return (
+                      <article key={cart.id}>
+                        <img src={cart.image} alt={cart.name}></img>
+                        <div className="details">
+                          <h3>{cart.name}</h3>
+                          <h4>{cart.price}</h4>
+                        </div>
+                      </article>
+                    );
+                  })
+                )}
+              </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>
         </ButtonsProfile>
@@ -53,30 +85,77 @@ export default Header;
 
 // Área do carrinho
 const ShowShoppingCartDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: content-box;
   opacity: ${(props) => props.opacity};
+  overflow-x: hidden;
   position: absolute;
   top: 50px;
-  right: 0px;
+  right: 8px;
+  background-color: #f0f0f0;
+  box-shadow: 2px 2px 3px #363535;
+  border-radius: 5px;
+  padding-top: 10px;
+  transition: height 300ms ease-out;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  z-index: 1;
+  article {
+    background-color: #ffff;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid;
+    border-color: #fae6b9;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 86px;
+    width: 264px;
+    box-shadow: 1px 1px 3px silver;
+    img {
+      height: 70px;
+      border: 2px solid;
+      border-color: #fae6b9;
+      border-radius: 5px;
+    }
+    h3 {
+      color: black;
+    }
+    h4 {
+      color: green;
+    }
+  }
+  .details {
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    width:100px;
+    height:70px;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const DivShopping = styled.div`
   position: relative;
   .box-point {
+    display: ${(props) => props.display};
     position: absolute;
-    top: -25px;
-    right: -6px;
-    color: #ffff;
+    width: 25px;
+    top: 35px;
+    right: 5px;
+    fill: #f0f0f0;
+    z-index: 1;
   }
 `;
 
-const ShoppingCart = styled.div`
-  transition: width 600ms ease-out, height 600ms ease-out;
-  width: ${(props) => props.width};
-  max-height: ${(props) => props.height};
-  border-radius: 5px;
-  background-color: #ffff;
-  box-shadow: 2px 2px 5px black;
-  z-index: 1;
-`;
+const ShoppingCartMain = styled.main``;
 
 // Nome do usuario logado
 const NameUser = styled.h3``;
