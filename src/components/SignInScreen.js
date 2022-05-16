@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
+import Logo from "../assets/img/MagicsportsLogo.png";
 
 import TokenContext from "../contexts/TokenContext";
 
@@ -46,10 +47,10 @@ function SignInScreen() {
 
     return (
         <Container>
-            <H1>We MAGIC!</H1>
+            <img src={Logo} alt="logo magic sports"/>
             <Form onSubmit={ev => LogIn(ev)}>
-                <Input placeholder="   E-mail" value={email} type="email" onChange={ev => setEmail(ev.target.value)}></Input>
-                <Input placeholder="   Senha" value={password} type="password" onChange={ev => setpassword(ev.target.value)}></Input>
+                <Input placeholder="E-mail" value={email} type="email" onChange={ev => setEmail(ev.target.value)}></Input>
+                <Input placeholder="Senha" value={password} type="password" onChange={ev => setpassword(ev.target.value)}></Input>
                 <Button type="submit">Entrar</Button>
             </Form>
             <StyledLink to="/sign-up">Primeira vez? Cadastre-se!</StyledLink>
@@ -60,58 +61,59 @@ function SignInScreen() {
 export default SignInScreen;
 
 const Container = styled.div`
-    background-color: #542084;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 375px;
-    height: 100vh;
-`;
-
-const H1 = styled.h1`
-    margin: 159px 0 24px 0;
-    height: 50px;
-    font-size: 32px;
-    line-height: 50px;
-    color: #FDBA22;
-    font-family: 'Saira Stencil One', cursive;
+  box-sizing: border-box;
+  background-color: #33164f;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items:center;
+  width: 100%;
+  height: 100vh;
+  img {
+    width: 300px;
+  }
 `;
 
 const Form = styled.form`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 326px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 360px;
 `;
 
 const Input = styled.input`
-    width: 326px;
-    height: 58px;
-    border-radius: 5px;
-    margin-bottom: 13px;
-    border: none;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    line-height: 23px;
+  padding-left: 15px;
+  font-family: Play;
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 13px;
+  border: 2x solid;
+  border-color: #fdb927;
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  line-height: 23px;
 `;
 
 const Button = styled.button`
-    width: 326px;
-    height: 46px;
-    border-radius: 5px;
-    background-color: #FDBA22;
-    border: none;
-    margin-bottom: 36px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    line-height: 23px;
-    color: #542084;
-    font-weight: 700;
+  width: 300px;
+  height: 46px;
+  border-radius: 5px;
+  background-color: #fdb927;
+  border: none;
+  margin-bottom: 36px;
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  line-height: 23px;
+  color: #ffff;
+  font-weight: 700;
 `;
 
 const StyledLink = styled(Link)`
-    color: #FDBA22;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    text-decoration: none;
+  color: #ffff;
+  font-family: Play;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 50px;
 `;

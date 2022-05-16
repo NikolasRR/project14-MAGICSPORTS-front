@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg";
+/* import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg"; */
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
 import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circle-outline.svg";
 import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-outline.svg";
