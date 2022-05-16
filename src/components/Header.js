@@ -116,7 +116,9 @@ function Header() {
               height={showShoppingCart ? "400px" : 0}
             >
               <ShoppingCartMain>
-                {shoppingCart ? (
+                {shoppingCart[0] !== null &&
+                shoppingCart[0] !== undefined &&
+                shoppingCart !== [] ? (
                   shoppingCart.map((cart, index) => {
                     return (
                       <article key={cart.id + index}>
@@ -135,11 +137,19 @@ function Header() {
                     );
                   })
                 ) : (
-                  <article>
-                    <h3>Ainda não há nada aqui...</h3>
-                  </article>
+                  <div className="nullShoppingCard">
+                    <h3>Você ainda não tem compras no carrinho... :(</h3>
+                  </div>
                 )}
-                {shoppingCart ?<button onClick={()=>navigate("/check-out")}>Comprar</button>:<></>}
+                {shoppingCart[0] !== null &&
+                shoppingCart[0] !== undefined &&
+                shoppingCart !== [] ? (
+                  <button onClick={() => navigate("/check-out")}>
+                    Comprar
+                  </button>
+                ) : (
+                  <></>
+                )}
               </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>
@@ -234,20 +244,29 @@ const DivShopping = styled.div`
 `;
 
 const ShoppingCartMain = styled.main`
-button {
-  position:absolute;
-  left:50px;
-  bottom:20px;
-  width:200px;
-  height:40px;
-  border:none;
-  border-radius: 5px;
-  color:#ffff;
-  font-family: Play;
-  font-weight: bold;
-  font-size:20px;
-  background-color:#fdb927;
-}
+  .nullShoppingCard {
+    position: absolute;
+    top: 50px;
+    left: 75px;
+    width: 200px;
+    color: #33164f;
+    font-family: Play;
+    font-weight: bold;
+  }
+  button {
+    position: absolute;
+    left: 50px;
+    bottom: 20px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: #ffff;
+    font-family: Play;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #fdb927;
+  }
 `;
 
 // Nome do usuario logado
@@ -341,7 +360,7 @@ const ButtonsProfile = styled.div`
 `;
 
 // Input de pesquisa de produtos
-const Search = styled.input`
+/* const Search = styled.input`
   width: 450px;
   height: 40px;
   color: black;
@@ -364,6 +383,6 @@ const SearchDiv = styled.div`
     width: 25px;
     color: silver;
   }
-`;
+`; */
 
 // Fim -------
