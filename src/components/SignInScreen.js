@@ -27,8 +27,19 @@ function SignInScreen() {
             navigate("/");
         })
         } catch (error) {
-            console.log(error);
-            alert("Usuário ou senha incorretos");
+            if (error.response.status === 404) {
+                alert("E-mail não cadastrado");
+                return;
+            }
+            if (error.response.status === 401) {
+                alert("Senha incorreta");
+                return;
+            }
+            if (error.response.status === 400) {
+                alert("Verifique se escreveu os dados corretamente");
+                return;
+            }
+            alert("Algo deu errado, tente novamente mais tarde");
         }
         
     }
