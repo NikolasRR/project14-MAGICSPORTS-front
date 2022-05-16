@@ -13,12 +13,16 @@ function Checkout() {
     const navigate = useNavigate();
 
     const { token } = useContext(TokenContext);
-    const { shoppingCart } = useContext(CartContext);
+    const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
-    let total = 0;
+    const [total, setTotal] = useState(0);
 
-    useEffect(async () => {
-        shoppingCart.forEach(product => total += product.price);
+    useEffect(() => {
+        let sum = 0;
+        shoppingCart.forEach(product => {
+            sum += parseFloat(product.price.replace(",", ""));
+        });
+        setTotal(sum);
     }, [shoppingCart]);
 
     const [street, setStreet] = useState("");
@@ -48,9 +52,10 @@ function Checkout() {
                 telephone: telephone.replace(/ /g, "").replace("-", "").trim(),
                 CCNumber: ccNumber.replace(/ /g, "").trim(),
                 CCExpirationDate: ccExpirationDate,
-                CCSecurityCode: ccSecurityCode.trim()
+                CCSecurityCode: ccSecurityCode.trim(),
+                value: total
             },
-            purchase: [{ item: "item" }]
+            purchase: shoppingCart
         };
 
         try {
@@ -59,6 +64,7 @@ function Checkout() {
             });
             console.log(res)
             alert("Compra efetuada");
+            setShoppingCart([]);
             navigate("/");
         } catch (error) {
             if (error.response.status === 400) {
@@ -76,7 +82,7 @@ function Checkout() {
                 <Products>
                     {shoppingCart?.map(product => <ProductCheckout key={product.id} product={product} />)}
                 </Products>
-                <Total>Total: R${total.toFixed(2)}</Total>
+                <Total>Total: R${total / 100}</Total>
             </Cart>
 
             <BuyerInfo onSubmit={ev => finishPurchase(ev)}>
@@ -129,12 +135,18 @@ const Cart = styled.section`
     margin: 50px auto;
     display: flex;
     align-items: center;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
 `;
 
 const Products = styled.div`
     overflow-x: scroll;
     display: flex;
     width: 250px;
+    @media (min-width: 650px) {
+        width: 525px;
+    }
 `;
 
 const Total = styled.p`

@@ -140,7 +140,7 @@ function Header() {
                     <h3>Ainda não há nada aqui...</h3>
                   </article>
                 )}
-                {shoppingCart ?<button onClick={()=>navigate("/check-out")}>Comprar</button>:<></>}
+                {shoppingCart ?<button onClick={()=>navigate("/checkout")}>Comprar</button>:<></>}
               </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>

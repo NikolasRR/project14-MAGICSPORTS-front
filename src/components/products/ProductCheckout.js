@@ -25,6 +25,7 @@ const Container = styled.article`
     margin-right: 5px;
     box-sizing: border-box;
     border: 1px solid #542084;
+    border-radius: 5px;
 `;
 
 const Img = styled.img`
