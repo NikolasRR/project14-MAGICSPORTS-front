@@ -5,6 +5,8 @@ import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outl
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
 import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circle-outline.svg";
 import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-outline.svg";
+import { ReactComponent as DeleteIcon } from "../assets/img/ion-icons/close.svg";
+
 import { useState } from "react";
 function Header() {
   const navigate = useNavigate();
@@ -25,7 +27,17 @@ function Header() {
     setShowShoppingCart(showShoppingCart ? false : true);
     getShoppingCart();
   }
-
+  async function ShoppingCartDelete(id) {
+    try {
+      await axios
+        .delete(`http://localhost:5000/shopping-cart?id=${id}`)
+        .then((res) => {
+          getShoppingCart();
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <Container>
       <Top>
@@ -63,6 +75,9 @@ function Header() {
                   shoppingCart.map((cart) => {
                     return (
                       <article key={cart.id}>
+                        <div className="delete" onClick={ShoppingCartDelete}>
+                          <DeleteIcon />
+                        </div>
                         <img src={cart.image} alt={cart.name}></img>
                         <div className="details">
                           <h3>{cart.name}</h3>
@@ -103,6 +118,7 @@ const ShowShoppingCartDiv = styled.div`
   height: ${(props) => props.height};
   z-index: 1;
   article {
+    position: relative;
     background-color: #ffff;
     padding: 5px 10px;
     margin: 5px;
@@ -127,14 +143,23 @@ const ShowShoppingCartDiv = styled.div`
     h4 {
       color: green;
     }
+    .delete {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      svg {
+        width: 20px;
+        fill: red;
+      }
+    }
   }
   .details {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    justify-content:center;
-    align-items:center;
-    width:100px;
-    height:70px;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 70px;
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
