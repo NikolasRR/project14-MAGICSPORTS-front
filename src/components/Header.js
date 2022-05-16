@@ -13,7 +13,7 @@ import CartContext from "../contexts/CartContext";
 
 function Header() {
   const navigate = useNavigate();
-  const { shoppingCart, setShoppingCart } = useContext(CartContext)
+  const { shoppingCart, setShoppingCart } = useContext(CartContext);
   const [showShoppingCart, setShowShoppingCart] = useState(false);
   const [name, setName] = useState("");
 
@@ -67,7 +67,10 @@ function Header() {
     };
     try {
       await axios
-        .delete(`https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,config)
+        .delete(
+          `https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,
+          config
+        )
         .then((res) => {
           getShoppingCart();
         });
@@ -83,28 +86,28 @@ function Header() {
     <Container>
       <Top>
         <Buttons>
-          {name===""?(
+          {name === "" ? (
             <>
               <Button onClick={() => navigate("/sign-in")}>Log in</Button>
               <Button onClick={() => navigate("/sign-up")}>Sign up</Button>
             </>
-             ):(
-              <Button onClick={logout}>Logout</Button>
-             )}
+          ) : (
+            <Button onClick={logout}>Logout</Button>
+          )}
         </Buttons>
       </Top>
       <Content>
-        <LogoDiv onClick={()=> navigate("/")}>
+        <LogoDiv onClick={() => navigate("/")}>
           <h1>MAGICSPORTS</h1>
           <h2>apenas para os bruxo do esporte</h2>
         </LogoDiv>
-       {/*  <SearchDiv>
+        {/*  <SearchDiv>
           <SearchSvg />
           <Search placeholder="...o que você procura?" />
         </SearchDiv> */}
         <ButtonsProfile>
           <UserIcon />
-          <NameUser>Olá, {name!==""?name:"Anônimo"}...</NameUser>
+          <NameUser>Olá, {name !== "" ? name : "Anônimo"}...</NameUser>
           <DivShopping onClick={getShoppingCart}>
             <ShoppingCartIcon />
             <PointIcon display={showShoppingCart ? "initial" : "none"} />
@@ -114,15 +117,14 @@ function Header() {
               height={showShoppingCart ? "400px" : 0}
             >
               <ShoppingCartMain>
-                {shoppingCart === [] ? (
-                  <article>
-                    <h3>Ainda não há nada aqui...</h3>
-                  </article>
-                ) : (
-                  shoppingCart.map((cart,index) => {
+                {shoppingCart ? (
+                  shoppingCart.map((cart, index) => {
                     return (
-                      <article key={cart.id+index}>
-                        <div className="delete" onClick={()=> ShoppingCartDelete(cart.id)}>
+                      <article key={cart.id + index}>
+                        <div
+                          className="delete"
+                          onClick={() => ShoppingCartDelete(cart.id)}
+                        >
                           <DeleteIcon />
                         </div>
                         <img src={cart.image} alt={cart.name}></img>
@@ -133,7 +135,12 @@ function Header() {
                       </article>
                     );
                   })
+                ) : (
+                  <article>
+                    <h3>Ainda não há nada aqui...</h3>
+                  </article>
                 )}
+                {shoppingCart ?<button onClick={()=>navigate("/check-out")}>Comprar</button>:<></>}
               </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>
@@ -227,7 +234,22 @@ const DivShopping = styled.div`
   }
 `;
 
-const ShoppingCartMain = styled.main``;
+const ShoppingCartMain = styled.main`
+button {
+  position:absolute;
+  left:50px;
+  bottom:20px;
+  width:200px;
+  height:40px;
+  border:none;
+  border-radius: 5px;
+  color:#ffff;
+  font-family: Play;
+  font-weight: bold;
+  font-size:20px;
+  background-color:#fdb927;
+}
+`;
 
 // Nome do usuario logado
 const NameUser = styled.h3``;
@@ -259,7 +281,9 @@ const Container = styled.header`
   height: 100px;
   width: 100%;
   background-color: #33164f;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
