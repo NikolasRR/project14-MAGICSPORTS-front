@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
 
 
@@ -10,6 +11,7 @@ function Checkout(ev) {
     const navigate = useNavigate();
 
     const { token } = useContext(TokenContext);
+    const { cart } = useContext(CartContext);
 
     const [street, setStreet] = useState("");
     const [number, setNumber] = useState("");
@@ -44,15 +46,26 @@ function Checkout(ev) {
         };
 
         try {
-            const res = axios.post("http://localhost:5000/checkout", purchaseInfo);
+            const res = await axios.post("http://localhost:5000/checkout", purchaseInfo, {
+                headers: { authorization: `Bearer ${token}` }
+            });
+            console.log(res)
             alert("Compra efetuada");
             navigate("/");
         } catch (error) {
+            if (error.response.status === 400) {
+                alert("Sessão expirada, por favor faça login novamente");
+                return;
+            }
+            alert("Verifique se preencheu os dados corretamente");
         }
     }
 
     return (
         <Container>
+            <Cart>
+                {cart?.map(product => <Minibox key={product.id}>{product}</Minibox>)}
+            </Cart>
             <BuyerInfo onSubmit={ev => finishPurchse(ev)}>
                 <Adress>
                     <SectionName>Endereço de entrega</SectionName>
@@ -93,17 +106,32 @@ export default Checkout;
 const Container = styled.main`
     width: 375px;
     margin: 0 auto;
+    @media (min-width: 650px) {
+        width: 650px;
+    }
+`;
+
+const Cart = styled.section`
+`;
+
+const Minibox = styled.article`
 `;
 
 const BuyerInfo = styled.form`
     width: 325px;
     margin: 0 auto;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
 `;
 
 const SectionName = styled.h3`
     font-family: Play;
     font-size: 25px;
     margin-bottom: 10px;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
 `;
 
 const Label = styled.label`
@@ -117,6 +145,9 @@ const Adress = styled.section`
 const Street = styled.input`
     width: 325px;
     margin-bottom: 5px;
+    @media (min-width: 650px) {
+        margin: 0 10px 10px 0;
+    }
 `;
 
 const Number = styled.input`
@@ -126,6 +157,10 @@ const Number = styled.input`
 
 const Apt = styled.input`
     width: 115px;
+    @media (min-width: 650px) {
+        margin-right: 10px;
+        width: 160px;
+    }
 `;
 
 const CEP = styled.input`
@@ -133,7 +168,7 @@ const CEP = styled.input`
 
 const Line = styled.div`
     margin: 20px auto;
-    border: 1px solid gray;
+    border: 1px solid #fdb927;
 `;
 
 const Payment = styled.section`
@@ -142,11 +177,18 @@ const Payment = styled.section`
 const CCOwner = styled.input`
     width: 325px;
     margin-bottom: 5px;
+    @media (min-width: 650px) {
+        width: 600px;
+        margin-bottom: 10px;
+    }
 `;
 
 const CPF = styled.input`
     width: 200px;
     margin-bottom: 5px;
+    @media (min-width: 650px) {
+        margin: 0 9px 10px 0;
+    }
 `;
 
 const Telephone = styled.input`
@@ -157,11 +199,18 @@ const Telephone = styled.input`
 const CCNumber = styled.input`
     width: 325px;
     margin-bottom: 5px;
+    @media (min-width: 650px) {
+        width: 470px;
+        margin-bottom: 10px;
+    }
 `;
 
 const CCExpirationDate = styled.input`
     width: 170px;
     margin-bottom: 5px;
+    @media (min-width: 650px) {
+        margin-right: 10px;
+    }
 `;
 
 const CCSecurityCode = styled.input`
@@ -178,4 +227,12 @@ const Button = styled.button`
     color: #fdb927;
     font-family: Koulen;
     font-size: 20px;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: #fdb927;
+        color: #542084;
+    }
 `;
