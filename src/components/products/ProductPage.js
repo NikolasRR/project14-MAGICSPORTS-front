@@ -57,8 +57,11 @@ const Container = styled.main`
 
 const Img = styled.img`
     width: 250px;
+    height: 250px;
+    object-fit: contain;
     @media (min-width: 650px) {
         width: 350px;
+        height: 350px;
         margin-right: 30px;
     }
 `;
@@ -74,7 +77,8 @@ const Infos = styled.div`
 `;
 
 const Name = styled.p`
-    font-family: Koulen;
+    font-family: Play;
+    font-weight: 700;
     font-size: 30px;
     margin: 40px 0 20px 0;
     color: #33164f;
@@ -118,6 +122,11 @@ const BuyNow = styled.button`
         height: 70px;
         margin-bottom: 15px;
     }
+    &:hover {
+        cursor: pointer;
+        background-color: #33164f;
+        color: #fdb927;
+    }
 `;
 
 const AddToCart = styled.button`
@@ -132,6 +141,11 @@ const AddToCart = styled.button`
         font-size: 30px;
         width: 270px;
         height: 70px;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: #33164f;
+        color: #fdb927;
     }
 `;
 
