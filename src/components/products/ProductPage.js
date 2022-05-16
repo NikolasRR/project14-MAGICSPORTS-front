@@ -1,58 +1,85 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../Header";
 
 function ProductPage() {
-    const { productID } = useParams();
-    const [infos, setInfos] = useState({});
+  const { productID } = useParams();
+  const [infos, setInfos] = useState({});
+  const navigate = useNavigate();
 
-    useEffect(async () => {
-        try {
-            const res = await axios.get(`https://magic-sports.herokuapp.com/products/${productID}`);
-            setInfos(res.data);
-        } catch (error) {
-            alert("deu ruim papa");
-        }
-    }, [])
+  async function postShoppingCart(id) {
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      await axios
+        .post(
+          `https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,
+          {},
+          config
+        )
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-    return (
-        <>
-            <Header />
-            <Container>
-                <Img src={infos.image} />
-                <InfosAndActions>
-                    <Infos>
-                        <Name>{infos.name}</Name>
-                        <Price>R${infos.price}</Price>
-                    </Infos>
-                    <Actions>
-                        <BuyNow>Compre agora</BuyNow>
-                        <AddToCart>Adicionar ao carrinho</AddToCart>
-                    </Actions>
-                </InfosAndActions>
-                <Description>
-                    <H4>Descrição:</H4>
-                    <P>{infos.description}</P>
-                </Description>
-            </Container>
-        </>
-    )
+  useEffect(async () => {
+    try {
+      const res = await axios.get(
+        `https://magic-sports.herokuapp.com/products/${productID}`
+      );
+      setInfos(res.data);
+    } catch (error) {
+      alert("deu ruim papa");
+    }
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <Container>
+        <Img src={infos.image} />
+        <InfosAndActions>
+          <Infos>
+            <Name>{infos.name}</Name>
+            <Price>R${infos.price}</Price>
+          </Infos>
+          <Actions>
+            <BuyNow>Compre agora</BuyNow>
+            <AddToCart onClick={() => postShoppingCart(infos.id)}>
+              Adicionar ao carrinho
+            </AddToCart>
+          </Actions>
+        </InfosAndActions>
+        <Description>
+          <H4>Descrição:</H4>
+          <P>{infos.description}</P>
+        </Description>
+      </Container>
+    </>
+  );
 }
 
 export default ProductPage;
 
 const Container = styled.main`
-    margin: 30px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 375px;
-    @media (min-width: 650px) {
-        width: 650px;
-    }
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 375px;
+  @media (min-width: 650px) {
+    width: 650px;
+  }
 `;
 
 const Img = styled.img`
@@ -67,14 +94,13 @@ const Img = styled.img`
 `;
 
 const InfosAndActions = styled.section`
-    width: 250px;
-    @media (min-width: 650px) {
-        width: 270px;
-    }
+  width: 250px;
+  @media (min-width: 650px) {
+    width: 270px;
+  }
 `;
 
-const Infos = styled.div`
-`;
+const Infos = styled.div``;
 
 const Name = styled.p`
     font-family: Play;
@@ -89,21 +115,21 @@ const Name = styled.p`
 `;
 
 const Price = styled.p`
-    font-family: Koulen;
-    font-size: 25px;
-    color: #fdb927;
-    @media (min-width: 650px) {
-        font-size: 35px;
-    }
+  font-family: Koulen;
+  font-size: 25px;
+  color: #fdb927;
+  @media (min-width: 650px) {
+    font-size: 35px;
+  }
 `;
 
 const Actions = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    @media (min-width: 650px) {
-        margin-top: 40px;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  @media (min-width: 650px) {
+    margin-top: 40px;
+  }
 `;
 
 const BuyNow = styled.button`
@@ -150,21 +176,21 @@ const AddToCart = styled.button`
 `;
 
 const Description = styled.div`
-    margin-top: 20px;
-    width: 250px;
-    font-family: Play;
-    @media (min-width: 650px) {
-        width: 650px;
-        margin-top: 40px;
-    }
+  margin-top: 20px;
+  width: 250px;
+  font-family: Play;
+  @media (min-width: 650px) {
+    width: 650px;
+    margin-top: 40px;
+  }
 `;
 
 const H4 = styled.h4`
-    font-weight: 700;
-    margin-bottom: 5px;
-    font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 22px;
 `;
 
 const P = styled.p`
-    font-size: 20px;
+  font-size: 20px;
 `;

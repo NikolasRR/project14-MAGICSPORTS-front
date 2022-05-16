@@ -16,7 +16,7 @@ import "./../assets/css/style.css";
 
 function App() {
     const [token, setToken] = useState(null);
-    const [shoppingCart, setShoppingcart] = useState([]);
+    const [shoppingCart, setShoppingCart] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem("userToken") !== null) {
@@ -25,7 +25,7 @@ function App() {
     }, []);
 
     return (
-        <CartContext.Provider value={{ shoppingCart, setShoppingcart }}>
+        <CartContext.Provider value={{ shoppingCart, setShoppingCart }}>
             <TokenContext.Provider value={{ token, setToken }}>
                 <BrowserRouter>
                     <Routes>
