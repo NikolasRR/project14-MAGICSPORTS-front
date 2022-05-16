@@ -16,6 +16,7 @@ function Header() {
   const { shoppingCart, setShoppingCart } = useContext(CartContext)
   const [showShoppingCart, setShowShoppingCart] = useState(false);
   const [name, setName] = useState("");
+
   useEffect(() => {
     async function getPerfil() {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -117,9 +118,9 @@ function Header() {
                     <h3>Ainda não há nada aqui...</h3>
                   </article>
                 ) : (
-                  shoppingCart.map((cart) => {
+                  shoppingCart.map((cart,index) => {
                     return (
-                      <article key={cart.id}>
+                      <article key={cart.id+index}>
                         <div className="delete" onClick={()=> ShoppingCartDelete(cart.id)}>
                           <DeleteIcon />
                         </div>
