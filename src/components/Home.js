@@ -45,6 +45,7 @@ function Home() {
 export default Home;
 
 const Container = styled.main`
+    margin-top:100px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
