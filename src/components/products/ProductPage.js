@@ -72,7 +72,7 @@ function ProductPage() {
 export default ProductPage;
 
 const Container = styled.main`
-  margin: 30px auto;
+  margin: 130px auto 30px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -83,14 +83,14 @@ const Container = styled.main`
 `;
 
 const Img = styled.img`
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    @media (min-width: 650px) {
-        width: 350px;
-        height: 350px;
-        margin-right: 30px;
-    }
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  @media (min-width: 650px) {
+    width: 350px;
+    height: 350px;
+    margin-right: 30px;
+  }
 `;
 
 const InfosAndActions = styled.section`
@@ -103,15 +103,15 @@ const InfosAndActions = styled.section`
 const Infos = styled.div``;
 
 const Name = styled.p`
-    font-family: Play;
-    font-weight: 700;
-    font-size: 30px;
-    margin: 40px 0 20px 0;
-    color: #33164f;
-    @media (min-width: 650px) {
-        font-size: 40px;
-        margin: 0 0 30px 0;
-    }
+  font-family: Play;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 40px 0 20px 0;
+  color: #33164f;
+  @media (min-width: 650px) {
+    font-size: 40px;
+    margin: 0 0 30px 0;
+  }
 `;
 
 const Price = styled.p`
@@ -133,46 +133,47 @@ const Actions = styled.div`
 `;
 
 const BuyNow = styled.button`
-    width: 250px;
-    height: 50px;
-    font-family: Koulen;
-    background-color: #fdb927;
-    color: #33164f;
-    margin-bottom: 5px;
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    @media (min-width: 650px) {
-        font-size: 30px;
-        width: 270px;
-        height: 70px;
-        margin-bottom: 15px;
-    }
-    &:hover {
-        cursor: pointer;
-        background-color: #33164f;
-        color: #fdb927;
-    }
+  width: 250px;
+  height: 50px;
+  font-family: Koulen;
+  background-color: #fdb927;
+  color: #33164f;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  @media (min-width: 650px) {
+    font-size: 30px;
+    width: 270px;
+    height: 70px;
+    margin-bottom: 15px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #33164f;
+    color: #fdb927;
+  }
 `;
 
 const AddToCart = styled.button`
-    width: 250px;
-    height: 50px;
-    font-family: Koulen;
-    background-color: #fdb927;
-    color: #33164f;border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    @media (min-width: 650px) {
-        font-size: 30px;
-        width: 270px;
-        height: 70px;
-    }
-    &:hover {
-        cursor: pointer;
-        background-color: #33164f;
-        color: #fdb927;
-    }
+  width: 250px;
+  height: 50px;
+  font-family: Koulen;
+  background-color: #fdb927;
+  color: #33164f;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  @media (min-width: 650px) {
+    font-size: 30px;
+    width: 270px;
+    height: 70px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #33164f;
+    color: #fdb927;
+  }
 `;
 
 const Description = styled.div`

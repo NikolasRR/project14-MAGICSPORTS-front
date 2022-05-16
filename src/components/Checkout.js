@@ -124,7 +124,7 @@ export default Checkout;
 
 const Container = styled.main`
     width: 375px;
-    margin: 0 auto;
+    margin: 130px auto 0 auto;
     @media (min-width: 650px) {
         width: 650px;
     }
