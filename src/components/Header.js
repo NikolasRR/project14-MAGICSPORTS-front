@@ -7,36 +7,63 @@ import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circl
 import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-outline.svg";
 import { ReactComponent as DeleteIcon } from "../assets/img/ion-icons/close.svg";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 function Header() {
   const navigate = useNavigate();
   const [shoppingCart, setShoppingCart] = useState([]);
   const [showShoppingCart, setShowShoppingCart] = useState(false);
-
-  async function getShoppingCart() {
-    const token = localStorage.getItem("userToken");
-    const config = {
-      headers: {
-        "Authorization" : `Bearer ${token}`
+  const [name, setName] = useState("");
+  useEffect(() => {
+    async function getPerfil() {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        await axios
+          .get("https://magic-sports.herokuapp.com/user", config)
+          .then((res) => {
+            setName(res.data);
+          });
+      } catch (e) {
+        console.log(e);
       }
     }
+    getPerfil();
+  }, []);
+
+  async function getShoppingCart() {
+    setShowShoppingCart(() => (showShoppingCart ? false : true));
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      await axios.get("https://magic-sports.herokuapp.com/shopping-cart",config).then((res) => {
-        const sCarts = res.data;
-        setShoppingCart(sCarts);
-      });
+      await axios
+        .get("https://magic-sports.herokuapp.com/shopping-cart", config)
+        .then((res) => {
+          const sCarts = [...res.data];
+          setShoppingCart(sCarts);
+        });
     } catch (e) {
       console.log(e);
     }
   }
-  function ShowShoppingCart() {
-    setShowShoppingCart(showShoppingCart ? false : true);
-    getShoppingCart();
-  }
   async function ShoppingCartDelete(id) {
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
       await axios
-        .delete(`https://magic-sports.herokuapp.com/?id=${id}`)
+        .delete(`https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,config)
         .then((res) => {
           getShoppingCart();
         });
@@ -44,12 +71,22 @@ function Header() {
       console.log(e);
     }
   }
+  function logout() {
+    localStorage.removeItem("userToken");
+    window.location.reload();
+  }
   return (
     <Container>
       <Top>
         <Buttons>
-          <Button onClick={() => navigate("/sign-in")}>Log in</Button>
-          <Button onClick={() => navigate("/sign-up")}>Sign up</Button>
+          {name===""?(
+            <>
+              <Button onClick={() => navigate("/sign-in")}>Log in</Button>
+              <Button onClick={() => navigate("/sign-up")}>Sign up</Button>
+            </>
+             ):(
+              <Button onClick={logout}>Logout</Button>
+             )}
         </Buttons>
       </Top>
       <Content>
@@ -57,14 +94,14 @@ function Header() {
           <h1>MAGICSPORTS</h1>
           <h2>apenas para os bruxo do esporte</h2>
         </LogoDiv>
-        <SearchDiv>
+       {/*  <SearchDiv>
           <SearchSvg />
           <Search placeholder="...o que você procura?" />
-        </SearchDiv>
+        </SearchDiv> */}
         <ButtonsProfile>
           <UserIcon />
-          <NameUser>Olá, Anonimo...</NameUser>
-          <DivShopping onClick={ShowShoppingCart}>
+          <NameUser>Olá, {name!==""?name:"Anônimo"}...</NameUser>
+          <DivShopping onClick={getShoppingCart}>
             <ShoppingCartIcon />
             <PointIcon display={showShoppingCart ? "initial" : "none"} />
             <ShowShoppingCartDiv
@@ -81,7 +118,7 @@ function Header() {
                   shoppingCart.map((cart) => {
                     return (
                       <article key={cart.id}>
-                        <div className="delete" onClick={ShoppingCartDelete}>
+                        <div className="delete" onClick={()=> ShoppingCartDelete(cart.id)}>
                           <DeleteIcon />
                         </div>
                         <img src={cart.image} alt={cart.name}></img>
