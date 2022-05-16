@@ -14,8 +14,14 @@ function Header() {
   const [showShoppingCart, setShowShoppingCart] = useState(false);
 
   async function getShoppingCart() {
+    const token = localStorage.getItem("userToken");
+    const config = {
+      headers: {
+        "Authorization" : `Bearer ${token}`
+      }
+    }
     try {
-      await axios.get("http://localhost:5000/shopping-cart").then((res) => {
+      await axios.get("https://magic-sports.herokuapp.com/shopping-cart",config).then((res) => {
         const sCarts = res.data;
         setShoppingCart(sCarts);
       });
@@ -30,7 +36,7 @@ function Header() {
   async function ShoppingCartDelete(id) {
     try {
       await axios
-        .delete(`http://localhost:5000/shopping-cart?id=${id}`)
+        .delete(`https://magic-sports.herokuapp.com/?id=${id}`)
         .then((res) => {
           getShoppingCart();
         });
