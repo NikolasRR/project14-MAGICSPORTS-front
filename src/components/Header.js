@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+
 /* import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg"; */
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
 import { ReactComponent as UserIcon } from "../assets/img/ion-icons/person-circle-outline.svg";
 import { ReactComponent as PointIcon } from "../assets/img/ion-icons/caret-up-outline.svg";
 import { ReactComponent as DeleteIcon } from "../assets/img/ion-icons/close.svg";
 
-import { useState, useEffect } from "react";
+import CartContext from "../contexts/CartContext";
 
 function Header() {
   const navigate = useNavigate();
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const { shoppingCart, setShoppingCart } = useContext(CartContext)
   const [showShoppingCart, setShowShoppingCart] = useState(false);
   const [name, setName] = useState("");
   useEffect(() => {
