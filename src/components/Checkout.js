@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
+import ProductCheckout from "./products/ProductCheckout";
 
 
 function Checkout(ev) {
@@ -12,6 +13,19 @@ function Checkout(ev) {
 
     const { token } = useContext(TokenContext);
     const { cart } = useContext(CartContext);
+
+    // const cart = [
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
+    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 }
+    // ];
+
+    let total = 0;
+    cart?.forEach(product => total += product.price);
 
     const [street, setStreet] = useState("");
     const [number, setNumber] = useState("");
@@ -25,7 +39,7 @@ function Checkout(ev) {
     const [ccExpirationDate, setCcExpirationDate] = useState("");
     const [ccSecurityCode, setCcSecurityCode] = useState("");
 
-    async function finishPurchse(ev) {
+    async function finishPurchase(ev) {
         ev.preventDefault();
         const purchaseInfo = {
             billingAdress: {
@@ -42,11 +56,11 @@ function Checkout(ev) {
                 CCExpirationDate: ccExpirationDate,
                 CCSecurityCode: ccSecurityCode.trim()
             },
-            purchase: [{item: "item"}]
+            purchase: [{ item: "item" }]
         };
 
         try {
-            const res = await axios.post("http://localhost:5000/checkout", purchaseInfo, {
+            const res = await axios.post("https://magic-sports.herokuapp.com/checkout", purchaseInfo, {
                 headers: { authorization: `Bearer ${token}` }
             });
             console.log(res)
@@ -64,9 +78,13 @@ function Checkout(ev) {
     return (
         <Container>
             <Cart>
-                {cart?.map(product => <Minibox key={product.id}>{product}</Minibox>)}
+                <Products>
+                    {cart?.map(product => <ProductCheckout key={product.id} product={product} />)}
+                </Products>
+                <Total>Total: R${total.toFixed(2)}</Total>
             </Cart>
-            <BuyerInfo onSubmit={ev => finishPurchse(ev)}>
+
+            <BuyerInfo onSubmit={ev => finishPurchase(ev)}>
                 <Adress>
                     <SectionName>Endereço de entrega</SectionName>
                     <Label htmlFor="street">Endereço</Label>
@@ -112,9 +130,23 @@ const Container = styled.main`
 `;
 
 const Cart = styled.section`
+    width: 325px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
 `;
 
-const Minibox = styled.article`
+const Products = styled.div`
+    overflow-x: scroll;
+    display: flex;
+    width: 250px;
+`;
+
+const Total = styled.p`
+    margin-left: 10px;
+    width: 20px;
+    font-family: Koulen;
+    background-color: aliceblue;
 `;
 
 const BuyerInfo = styled.form`
