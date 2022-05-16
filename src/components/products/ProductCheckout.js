@@ -19,8 +19,8 @@ export default ProductCheckout;
 const Container = styled.article`
     display: flex;
     flex-wrap: wrap;
-    min-width: 100px;
-    max-width: 100px;
+    width: 100px;
+    flex-shrink: 0;
     resize: none;
     margin-right: 5px;
     box-sizing: border-box;

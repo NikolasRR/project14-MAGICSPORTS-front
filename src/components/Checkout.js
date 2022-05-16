@@ -1,31 +1,25 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
+import Header from "./Header";
 import ProductCheckout from "./products/ProductCheckout";
 
 
-function Checkout(ev) {
+function Checkout() {
     const navigate = useNavigate();
 
     const { token } = useContext(TokenContext);
-    const { cart } = useContext(CartContext);
-
-    // const cart = [
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 },
-    //     { name: "bola de basquete", image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBnkNspcynE6FNG_J2au07NFg_I2hoNbgY9gSb_jXnDBVkxw_fIm6ljBBSC2EIejCWu1vrVIKdr68&usqp=CAc", price: 99.90 }
-    // ];
+    const { shoppingCart } = useContext(CartContext);
 
     let total = 0;
-    cart?.forEach(product => total += product.price);
+
+    useEffect(async () => {
+        shoppingCart.forEach(product => total += product.price);
+    }, [shoppingCart]);
 
     const [street, setStreet] = useState("");
     const [number, setNumber] = useState("");
@@ -75,11 +69,12 @@ function Checkout(ev) {
         }
     }
 
-    return (
+    return (<>
+        <Header />
         <Container>
             <Cart>
                 <Products>
-                    {cart?.map(product => <ProductCheckout key={product.id} product={product} />)}
+                    {shoppingCart?.map(product => <ProductCheckout key={product.id} product={product} />)}
                 </Products>
                 <Total>Total: R${total.toFixed(2)}</Total>
             </Cart>
@@ -116,7 +111,7 @@ function Checkout(ev) {
                 <Button type="submit">Finalizar Compra</Button>
             </BuyerInfo>
         </Container>
-    )
+    </>)
 }
 
 export default Checkout;
