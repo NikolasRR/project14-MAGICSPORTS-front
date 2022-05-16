@@ -93,7 +93,7 @@ function Header() {
         </Buttons>
       </Top>
       <Content>
-        <LogoDiv>
+        <LogoDiv onClick={()=> navigate("/")}>
           <h1>MAGICSPORTS</h1>
           <h2>apenas para os bruxo do esporte</h2>
         </LogoDiv>
