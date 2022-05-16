@@ -10,7 +10,7 @@ function ProductBox (params) {
             <Img src={image} />
             <Info>
                 <Name>{name}</Name>
-                <Price>R${price}, e o id: {id}</Price>
+                <Price>R${price}</Price>
                 
             </Info>
         </Box>
@@ -47,6 +47,7 @@ const Box = styled.article`
 
 const Img = styled.img`
     width: 100px;
+    height: 100px;
     margin-top: 10px;
     object-fit: contain;
 `;
@@ -62,10 +63,13 @@ const Name = styled.p`
     font-family: 'Josefin Sans', sans-serif;
     color: #542084;
     font-weight: 700;
-    padding-bottom: 20px;
+    height: 40px;
+    margin-bottom: 10px;
 `;
 
 const Price = styled.p`
     font-size: 14px;
+    font-weight: 700;
     font-family: 'Josefin Sans', sans-serif;
+    color: #000000;
 `;
