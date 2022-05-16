@@ -72,8 +72,7 @@ function ProductPage() {
 export default ProductPage;
 
 const Container = styled.main`
-  margin-top: 100px;
-  margin: 30px auto;
+  margin: 130px auto 30px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

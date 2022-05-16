@@ -45,11 +45,10 @@ function Home() {
 export default Home;
 
 const Container = styled.main`
-    margin-top:100px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 50px auto 0 auto;
+    margin: 130px auto 0 auto;
     width: 375px;
     @media (min-width: 650px) {
         width: 650px;

@@ -1,17 +1,29 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import CartContext from "../contexts/CartContext";
 import TokenContext from "../contexts/TokenContext";
+import Header from "./Header";
+import ProductCheckout from "./products/ProductCheckout";
 
 
-function Checkout(ev) {
+function Checkout() {
     const navigate = useNavigate();
 
     const { token } = useContext(TokenContext);
-    const { cart } = useContext(CartContext);
+    const { shoppingCart, setShoppingCart } = useContext(CartContext);
+
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        let sum = 0;
+        shoppingCart.forEach(product => {
+            sum += parseFloat(product.price.replace(",", ""));
+        });
+        setTotal(sum);
+    }, [shoppingCart]);
 
     const [street, setStreet] = useState("");
     const [number, setNumber] = useState("");
@@ -25,7 +37,7 @@ function Checkout(ev) {
     const [ccExpirationDate, setCcExpirationDate] = useState("");
     const [ccSecurityCode, setCcSecurityCode] = useState("");
 
-    async function finishPurchse(ev) {
+    async function finishPurchase(ev) {
         ev.preventDefault();
         const purchaseInfo = {
             billingAdress: {
@@ -40,17 +52,19 @@ function Checkout(ev) {
                 telephone: telephone.replace(/ /g, "").replace("-", "").trim(),
                 CCNumber: ccNumber.replace(/ /g, "").trim(),
                 CCExpirationDate: ccExpirationDate,
-                CCSecurityCode: ccSecurityCode.trim()
+                CCSecurityCode: ccSecurityCode.trim(),
+                value: total
             },
-            purchase: [{item: "item"}]
+            purchase: shoppingCart
         };
 
         try {
-            const res = await axios.post("http://localhost:5000/checkout", purchaseInfo, {
+            const res = await axios.post("https://magic-sports.herokuapp.com/checkout", purchaseInfo, {
                 headers: { authorization: `Bearer ${token}` }
             });
             console.log(res)
             alert("Compra efetuada");
+            setShoppingCart([]);
             navigate("/");
         } catch (error) {
             if (error.response.status === 400) {
@@ -61,12 +75,17 @@ function Checkout(ev) {
         }
     }
 
-    return (
+    return (<>
+        <Header />
         <Container>
             <Cart>
-                {cart?.map(product => <Minibox key={product.id}>{product}</Minibox>)}
+                <Products>
+                    {shoppingCart?.map(product => <ProductCheckout key={product.id} product={product} />)}
+                </Products>
+                <Total>Total: R${total / 100}</Total>
             </Cart>
-            <BuyerInfo onSubmit={ev => finishPurchse(ev)}>
+
+            <BuyerInfo onSubmit={ev => finishPurchase(ev)}>
                 <Adress>
                     <SectionName>Endereço de entrega</SectionName>
                     <Label htmlFor="street">Endereço</Label>
@@ -98,23 +117,43 @@ function Checkout(ev) {
                 <Button type="submit">Finalizar Compra</Button>
             </BuyerInfo>
         </Container>
-    )
+    </>)
 }
 
 export default Checkout;
 
 const Container = styled.main`
     width: 375px;
-    margin: 0 auto;
+    margin: 130px auto 0 auto;
     @media (min-width: 650px) {
         width: 650px;
     }
 `;
 
 const Cart = styled.section`
+    width: 325px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
 `;
 
-const Minibox = styled.article`
+const Products = styled.div`
+    overflow-x: scroll;
+    display: flex;
+    width: 250px;
+    @media (min-width: 650px) {
+        width: 525px;
+    }
+`;
+
+const Total = styled.p`
+    margin-left: 10px;
+    width: 20px;
+    font-family: Koulen;
+    background-color: aliceblue;
 `;
 
 const BuyerInfo = styled.form`

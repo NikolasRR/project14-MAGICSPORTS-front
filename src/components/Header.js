@@ -52,6 +52,7 @@ function Header() {
         .then((res) => {
           const sCarts = [...res.data];
           setShoppingCart(sCarts);
+          console.log(shoppingCart)
         });
     } catch (e) {
       console.log(e);
@@ -150,6 +151,7 @@ function Header() {
                 ) : (
                   <></>
                 )}
+                {shoppingCart ?<button onClick={()=>navigate("/checkout")}>Comprar</button>:<></>}
               </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>
