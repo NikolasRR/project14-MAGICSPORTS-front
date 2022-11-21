@@ -12,7 +12,8 @@
     "styled-components": "^5.3.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "react:start":"react-scripts start",
+    "start": "docker-compose up",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
