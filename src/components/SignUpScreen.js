@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/img/MagicsportsLogo.png";
 import { useState } from "react";
 import axios from "axios";
+import HTTP from "./../assets/config/http.js";
 
 function SignUpScreen() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function SignUpScreen() {
     }
     try {
       await axios
-        .post("https://magic-sports.herokuapp.com/sign-up", {
+        .post(`${HTTP}sign-up`, {
           name,
           email,
           password,
@@ -75,7 +76,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items:center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   img {

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import HTTP from "./../assets/config/http.js";
 
 import Header from "../Header";
 
@@ -19,11 +20,7 @@ function ProductPage() {
     };
     try {
       await axios
-        .post(
-          `https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,
-          {},
-          config
-        )
+        .post(`${HTTP}shopping-cart?id=${id}`, {}, config)
         .then((res) => {
           console.log(res);
         });
@@ -34,9 +31,7 @@ function ProductPage() {
 
   useEffect(async () => {
     try {
-      const res = await axios.get(
-        `https://magic-sports.herokuapp.com/products/${productID}`
-      );
+      const res = await axios.get(`${HTTP}products/${productID}`);
       setInfos(res.data);
     } catch (error) {
       alert("deu ruim papa");
