@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import HTTP from "./../assets/config/http.js";
+import HTTP from "./../../assets/config/http.js";
 
 import Header from "../Header";
 
 function ProductPage() {
   const { productID } = useParams();
   const [infos, setInfos] = useState({});
-  const navigate = useNavigate();
 
   async function postShoppingCart(id) {
     const token = JSON.parse(localStorage.getItem("userToken"));

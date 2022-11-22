@@ -5,15 +5,12 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 import ProductBox from "./products/ProductBox.js";
 import HTTP from "./../assets/config/http.js";
-import PageNumber from "./PageNumber.js";
 import Header from "./Header";
 
 function Home() {
   const [last, setLast] = useState(0);
   const [products, setProducts] = useState([]);
   const [pages, setPages] = useState([]);
-  const current = Math.ceil((last + 20) / 20);
-
   useEffect(async () => {
     try {
       const res = await axios.get(`${HTTP}products?limit=20&last=${last}`);
