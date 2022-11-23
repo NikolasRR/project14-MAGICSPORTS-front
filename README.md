@@ -7,8 +7,8 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-closed-red.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/raferdev/batepapo-uol-api.svg)](https://github.com//raferdev/batepapo-uol-api/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/raferdev/batepapo-uol-api/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/raferdev/MAGICSPORTS-front.svg)](https://github.com//raferdev/MAGICSPORTS-front/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/raferdev/MAGICSPORTS-front/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -40,7 +40,7 @@ This is a frontend part of FullStack project. The backend you can see <a href="h
 
 ## 🧐 About <a name = "about"></a>
 
-This project was built on one week and encrease my consepts about javascript enviroment, using ReactJS, and NodeJS to create one web app completly. This frontend simulate one e-commerce. User can see all products without account, and can register youself if want to save your list on shopping cart. <a href="https://github.com/raferdev/mywallet-back">(backend)</a>.
+This project was built on one week and encrease my consepts about javascript enviroment, using ReactJS, and NodeJS to create one web app completly. This frontend simulate one e-commerce. User can see all products without account, and can register youself if want to save your list on shopping cart. <a href="https://github.com/raferdev/MAGICSPORTS-back">(backend)</a>.
 
 ---
 
@@ -262,54 +262,56 @@ OVERVIEW:
 
 ```
 
-- **/new-deposit** (only logged)
+- **product/:productID**
 
-<img align="left"  src="./readme/entries.png" height="400px"/>
+<img align="left"  src="./readme/product-cart.png" height="200px"/>
 
 ```
+
+BUTTON:
+    - "Comprar" =
+    Here you go to checkout page
+    to confirm your buy.
+    - "Adicionar ao Carrinho" =
+    Here you will add the product
+    on cart list.
+    - Shopping Cart Icon =
+    Click to see the list
+
+OVERVIEW:
+    -  Here you can see the
+    product description.
+
+```
+
+- **/checkout**
+
+<img align="right"  src="./readme/checkout.png" height="200px"/>
+
+```
+- DON'T USE VALID INFORMATIONS
 INPUT:
-    - "Valor" = You can put one
-    integer number of deposit.
-    - "Descrição" = You can
+    - "Endereço de entrega" = You can
+    put one address.
+    - "Apartamento" = You can put
+    one house or flat number.
+    (min 3 letters)
+    - "CEP" = Use one number
+    with length 8.
+    - "Número" = You can
     describe the transaction.
     (min 3 letters)
-    - "Salvar Entrada" = You will
-    save the transaction log.
-
-LINK:
-    - "Já tem uma conta?
-     Entre agora!" =
-    Here you can use if you
-    have one registered accont.
-
-
-
-
-```
-
-- **/new-payment** (only logged)
-
-<img align="right"  src="./readme/payments.png" height="400px"/>
-
-```
-INPUT:
-    - "Valor" = You can put one
-    integer number of payment.
-    - "Descrição" = You can
-    describe the transaction.
-    (min 3 letters)
-    - "Salvar Entrada" = You will
-    save the transaction log.
-
-
-
-
-
-
-
-
-
-
+    - "Titular do Cartão" = Name of the
+    credit card owner.
+    - "CPF" = Number with
+    length 11.
+    - "Telefone com DDD" = Number phone
+    with length 12.
+    - "Cartão de Crédito" = Number of the
+    credit card with length 16.
+    - "Validade do Cartão" = Number.
+    - "Código de segurança" = Number with
+    length 3.
 ```
 
 ---
