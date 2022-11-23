@@ -1,70 +1,330 @@
-# Getting Started with Create React App
+<p align="center">
+ <img  height=200px src="./readme.png" alt="Project logo">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">MAGICSports</h3>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+[![Status](https://img.shields.io/badge/status-closed-red.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/raferdev/MAGICSPORTS-front.svg)](https://github.com//raferdev/MAGICSPORTS-front/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/raferdev/MAGICSPORTS-front/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+ <img width=auto height=auto src="./readme-banner.png" alt="Project logo">
+ <img width=auto height=auto src="./readme-banner2.png" alt="Project logo">
+</p>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center"> 
+This is a frontend part of FullStack project. The backend you can see <a href="https://github.com/raferdev/MAGICSPORTS-back">here</a>. This project was built using ReactJS, and simulate one e-commerce application.
+</p>
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📝 Table of Contents
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [Authors](#authors)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🧐 About <a name = "about"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project was built on one week and encrease my consepts about javascript enviroment, using ReactJS, and NodeJS to create one web app completly. This frontend simulate one e-commerce. User can see all products without account, and can register youself if want to save your list on shopping cart. <a href="https://github.com/raferdev/MAGICSPORTS-back">(backend)</a>.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You can clone the project and start on your local host like below.
 
-## Learn More
+### Prerequisites
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You need install **_GIT_** if you don't already have, to clone project,.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<a href="https://git-scm.com/downloads">Click here</a> or Acess:
 
-### Code Splitting
+```
+https://git-scm.com/downloads
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You need install **_Docker_** on your machine if you don't already have.
 
-### Analyzing the Bundle Size
+<a href="https://docs.docker.com/get-docker">Click here</a> or Acess:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+https://docs.docker.com/get-docker/
+```
 
-### Making a Progressive Web App
+And use the step-by-step doc to download and install on your specific system.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Installing
 
-### Advanced Configuration
+1 - Clone on your local system
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+git clone https://github.com/raferdev/MAGICSPORTS-front
+```
 
-### Deployment
+2 - Go to project path
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+cd MAGICSPORTS-front
+```
 
-### `npm run build` fails to minify
+3 - Create env file
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You can rename the ".env.exemple" file to ".env", just removing ".exemple" and save, or follow this steps to create new one:
+
+- Open a text editor or other editor do you prefeer, create this variables like below and save file with name '.env'.
+
+```
+REACT_APP_HTTP=http://localhost:5000/
+```
+
+You can change the values of variables if you want or need.
+
+### Start
+
+Use on terminal:
+
+```
+npm start
+```
+
+_The attached console will show:_
+
+```
+Starting the development server...
+
+Compiled successfully!
+
+You can now view mywallet-front in the browser.
+
+Local:            http://localhost:3000
+On Your Network:  http://172.22.0.2:3000
+
+Note that the development build is not optimized.
+
+webpack compiled successfully
+```
+
+---
+
+## 🎈 Usage <a name="usage"></a>
+
+Now you can access the route below on browser:
+
+```
+http://localhost:3000/
+```
+
+- **GUIDE** :
+
+    <img align="left"  src="./readme/signin.png" height="200px"/>
+
+  - **/route** - the path route did you can acess using your host
+
+```
+- Here you can see the
+description of what you
+can do on this page.
+
+
+
+
+```
+
+---
+
+**Exemple:**
+
+- **/sign-in**
+
+    <img align="right"  src="./readme/signin.png" height="200px"/>
+
+  ```
+  INPUT:
+  - Email = If you have a
+  valid registered email
+  you can put here.
+  - Password = If you have one
+  registered email you can put
+  the respective password here.
+
+  BUTTON:
+  - "Entrar": Send request to
+  signin when you put one email
+  and password.
+
+  LINK:
+  - "Primeira vez?
+     Cadastre-se!":
+  Here you can use if you won't
+  have one
+  registered accont yet (your
+  fisrt time using the app)
+
+  ```
+
+  ***
+
+  **Usage**
+
+  - On all frontend access you will use GET method, it's just copy and paste the route on browser or use by clicking on the buttons and links. In this case you will make a request on _http://localhost:3000/signin_ to see and interact with the page using by the above instructions.
+
+  ***
+
+**LET'S GO** - API description.
+
+- **/sign-in**
+
+    <img align="right"  src="./readme/signin.png" height="200px"/>
+
+```
+INPUT:
+    - "Email" = If you have a
+    valid registered email
+    you can put here.
+    - "Senha" = If you have one
+    registered email you can put
+    the respective password here.
+
+BUTTON:
+    - "Entrar": Send request to
+    signin when you put one email
+    and password.
+
+LINK:
+    - "Primeira vez?
+       Cadastre-se!":
+    Here you can use if you won't
+    have one
+    registered accont yet (your
+    fisrt time using the app)
+```
+
+- **/sign-up**
+
+<img align="left"  src="./readme/signup.png" height="200px"/>
+
+```
+    INPUT:
+    - "Nome" = Put your name.
+    - Email = Put your email.
+    - "Senha" = Put your password.
+    - "Confirme sua senha" =
+        confirm your password.
+
+    BUTTON:
+    - "Cadastrar" = Send request
+    to signup when you put name,
+    email and password.
+
+    LINK:
+    - "Já tem uma conta?
+     Entre agora!" =
+    Here you can use if you
+    have one registered accont.
+
+```
+
+- **/**
+
+<img align="right"  src="./readme/home.png" height="200px"/>
+
+```
+BUTTON:
+    - Signin = Send to
+    login page.
+    - Signup = Send to
+    signup page.
+    - Logout = If logged,
+    user can click to
+    logged out.
+    - Cart List = The cart icon
+    on the top right of page
+    you can click to open list
+    of interest products.
+
+OVERVIEW:
+    - Here you see all list of products on selling.
+
+```
+
+- **product/:productID**
+
+<img align="left"  src="./readme/product-cart.png" height="200px"/>
+
+```
+
+BUTTON:
+    - "Comprar" =
+    Here you go to checkout page
+    to confirm your buy.
+    - "Adicionar ao Carrinho" =
+    Here you will add the product
+    on cart list.
+    - Shopping Cart Icon =
+    Click to see the list
+
+OVERVIEW:
+    -  Here you can see the
+    product description.
+
+```
+
+- **/checkout**
+
+<img align="right"  src="./readme/checkout.png" height="200px"/>
+
+```
+- DON'T USE VALID INFORMATIONS
+INPUT:
+    - "Endereço de entrega" = You can
+    put one address.
+    - "Apartamento" = You can put
+    one house or flat number.
+    (min 3 letters)
+    - "CEP" = Use one number
+    with length 8.
+    - "Número" = You can
+    describe the transaction.
+    (min 3 letters)
+    - "Titular do Cartão" = Name of the
+    credit card owner.
+    - "CPF" = Number with
+    length 11.
+    - "Telefone com DDD" = Number phone
+    with length 12.
+    - "Cartão de Crédito" = Number of the
+    credit card with length 16.
+    - "Validade do Cartão" = Number.
+    - "Código de segurança" = Number with
+    length 3.
+```
+
+---
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+- [ReactJS](https://pt-br.reactjs.org/) - Super Library Javascript
+- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Style Language
+- [Docker](https://www.docker.com/) - Container Technology
+
+---
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@raferdev](https://github.com/raferdev)
+- [@NikolasRR](https://github.com/NikolasRR)

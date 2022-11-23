@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
+import HTTP from "./../assets/config/http.js";
 
 /* import { ReactComponent as SearchSvg } from "../assets/img/ion-icons/search-outline.svg"; */
 import { ReactComponent as ShoppingCartIcon } from "../assets/img/ion-icons/cart-outline.svg";
@@ -26,11 +27,9 @@ function Header() {
         },
       };
       try {
-        await axios
-          .get("https://magic-sports.herokuapp.com/user", config)
-          .then((res) => {
-            setName(res.data);
-          });
+        await axios.get(`${HTTP}user`, config).then((res) => {
+          setName(res.data);
+        });
       } catch (e) {
         console.log(e);
       }
@@ -47,13 +46,11 @@ function Header() {
       },
     };
     try {
-      await axios
-        .get("https://magic-sports.herokuapp.com/shopping-cart", config)
-        .then((res) => {
-          const sCarts = [...res.data];
-          setShoppingCart(sCarts);
-          console.log(shoppingCart)
-        });
+      await axios.get(`${HTTP}shopping-cart`, config).then((res) => {
+        const sCarts = [...res.data];
+        setShoppingCart(sCarts);
+        console.log(shoppingCart);
+      });
     } catch (e) {
       console.log(e);
     }
@@ -67,10 +64,7 @@ function Header() {
     };
     try {
       await axios
-        .delete(
-          `https://magic-sports.herokuapp.com/shopping-cart?id=${id}`,
-          config
-        )
+        .delete(`${HTTP}shopping-cart?id=${id}`, config)
         .then((res) => {
           getShoppingCart();
         });
@@ -151,7 +145,11 @@ function Header() {
                 ) : (
                   <></>
                 )}
-                {shoppingCart ?<button onClick={()=>navigate("/checkout")}>Comprar</button>:<></>}
+                {shoppingCart ? (
+                  <button onClick={() => navigate("/checkout")}>Comprar</button>
+                ) : (
+                  <></>
+                )}
               </ShoppingCartMain>
             </ShowShoppingCartDiv>
           </DivShopping>

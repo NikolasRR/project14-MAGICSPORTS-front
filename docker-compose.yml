@@ -1,0 +1,11 @@
+services:
+  magicsports-front:
+    container_name: magicsports-front
+    build: .
+    restart: always
+    env_file:
+     - .env
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
