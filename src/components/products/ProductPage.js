@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import HTTP from "./../../assets/config/http.js";
 
@@ -28,13 +28,16 @@ function ProductPage() {
     }
   }
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get(`${HTTP}products/${productID}`);
-      setInfos(res.data);
-    } catch (error) {
-      alert("deu ruim papa");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${HTTP}products/${productID}`);
+        setInfos(res.data);
+      } catch (error) {
+        alert("deu ruim papa");
+      }
     }
+    fetchData();
   }, []);
 
   return (

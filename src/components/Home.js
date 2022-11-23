@@ -11,14 +11,17 @@ function Home() {
   const [last, setLast] = useState(0);
   const [products, setProducts] = useState([]);
   const [pages, setPages] = useState([]);
-  useEffect(async () => {
-    try {
-      const res = await axios.get(`${HTTP}products?limit=20&last=${last}`);
-      setProducts(res.data.page);
-      setPages(res.data.pages);
-    } catch (error) {
-      alert("deu ruim papa");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`${HTTP}products?limit=20&last=${last}`);
+        setProducts(res.data.page);
+        setPages(res.data.pages);
+      } catch (error) {
+        alert("deu ruim papa");
+      }
     }
+    fetchData();
   }, [last]);
 
   const previousPageIcon = last !== 0 && (
@@ -32,8 +35,8 @@ function Home() {
     <>
       <Header />
       <Container>
-        {products?.map((product) => (
-          <ProductBox key={product.id} product={product} />
+        {products?.map((product, index) => (
+          <ProductBox key={index} product={product} />
         ))}
       </Container>
       <PageNavigation>
